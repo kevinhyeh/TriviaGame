@@ -1,1 +1,7 @@
- style.css
+.options {
+	width: 200px;
+}
+
+.options:hover {
+	color: #fff;
+}
