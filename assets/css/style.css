@@ -4,4 +4,42 @@
 
 .options:hover {
 	color: #fff;
+	background-color: #000;
+}
+
+h1,
+div {
+	color: #fff;
+	text-align: center;
+}
+
+h1 {
+	font-family: 'Abril Fatface', cursive;
+	font-size: 100px!important;
+	margin-top: 40px!important;
+}
+
+div {
+	font-family: 'Space Mono', monospace;
+	font-size: 20px;
+}
+
+body {
+	background-image: url("../images/spacebg.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+.options {
+	border-radius: 30px;
+	margin: 10px;
+	width: 300px;
+}
+
+#start {
+	margin-top: 220px;
+}
+
+#timer {
+	margin-top: 100px;
 }
