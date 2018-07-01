@@ -15,20 +15,25 @@ var gifs = {
 	orbit: 'https://media.giphy.com/media/ipMj7kerASRXO/200.gif',
 	man: 'https://media.giphy.com/media/m3aDH8GEfqNeU/200.gif',
 	sun: 'https://media.giphy.com/media/xT0Gqz4x4eLd5gDtaU/200.gif',
-	venus: 'https://media.giphy.com/media/pryxIWM8T88Qo/200.gif',
+	venus: 'https://media.giphy.com/media/csUHYurqlupfq/200.gif',
 	pluto: 'https://media.giphy.com/media/w0iDk4wqyMwpi/200.gif',
 	moons: 'https://media.giphy.com/media/l3970BECiUweOrOnu/200.gif',
 	travel: 'https://media.giphy.com/media/l3fQnG7CVU9OytX3y/200.gif',
-	nineth: 'https://media.giphy.com/media/l3970BECiUweOrOnu/200.gif',
-	martian: 'https://media.giphy.com/media/l3970BECiUweOrOnu/200.gif',
-	win: 'https://media.giphy.com/media/26DOoDwdNGKAg6UKI/200.gif',
-	lose: 'https://media.giphy.com/media/hPPx8yk3Bmqys/200.gif'
+	nineth: 'https://media.giphy.com/media/tdTB899Aa7gcM/200.gif',
+	martian: 'https://media.giphy.com/media/TaZddT2KC3wFa/200.gif',
+	lose: 'https://media.giphy.com/media/hPPx8yk3Bmqys/200.gif',
+	time: 'https://media.giphy.com/media/3ornjXizVZDbngmjRK/200.gif'
 }
 var correctAnswers = 0;
 var incorrectAnswers = 0;
 var unanswered = 0;
 var sTimer = 15;
 var nextTimer = 0;
+
+function addGif(num) {
+	var imgGif = $('<img>').attr('src', num);
+	$('#box').html(imgGif)
+}
 
 function answersOptions(e) {
     for (var i in answers[0]) {
@@ -46,12 +51,16 @@ function startTimer() {
     $('#timer').html('Time Remaining: ' + sTimer + ' seconds');
     if (sTimer == 0) {
         $('#question').html("");
-        $('#box').html("Ran out of time");
+        addGif(gifs.time);
+        $('#answer').html("Ran out of time");
         clearInterval(clearTimer);
         invisTimer = setInterval(interTimer, 1000);
         unanswered++;
         $('#gif').html("The correct answer is " + trueAns);
     }
+    if (sTimer <= 5) {
+    	$('#timer').css('color', 'red');
+    } 
 }
 
 function nextQuestion(next) {
@@ -63,6 +72,7 @@ function nextQuestion(next) {
     clearTimer = setInterval(startTimer, 1000);
     clearInterval(invisTimer);
     $('#gif').empty();
+    $('#timer').css('color', '#fff');
 }
 
 function interTimer() {
@@ -115,11 +125,13 @@ function interTimer() {
     if (nextTimer == 30) {
         var restart = $('<button>').html("Restart");
         var result = $('<div>').html('Correct Answers: ' + correctAnswers + '<br>' + 'Incorrect Answers: ' + incorrectAnswers + '<br>' + 'Unanswered: ' + unanswered);
+        result.addClass('result');
         restart.addClass('restart');
         $('#gif').html(restart);
         $('#question').html(result);
         clearInterval(invisTimer);
         $('#box').empty();
+        $('#answer').empty();
     }
 }
 
@@ -131,11 +143,6 @@ $('#start').on('click', function() {
     answersOptions(0);
     $('button:eq(1)').attr('data-answer', true);
 });
-
-function addGif(num) {
-	var imgGif = $('<img>').attr('src', num);
-	$('#box').html(imgGif)
-}
 
 $(document).on('click', '.options', function() {
     if ($(this).html() == 'Mercury' || $(this).html() == '365 Days' || $(this).html() == 'Neil Armstrong' || $(this).html() == '5,778 Kelvin' || $(this).html() == 'Venus' || $(this).html() == '2006' || $(this).html() == '53' || $(this).html() == 'About 300 Days' || $(this).html() == 'Planet Nine' || $(this).html() == '1,479 Minutes') {
@@ -166,7 +173,7 @@ $(document).on('click', '.options', function() {
         if ($(this).html() == 'Planet Nine') {
             addGif(gifs.nineth);
         }
-        if ($(this).html() == '1479 Minutes') {
+        if ($(this).html() == '1,479 Minutes') {
             addGif(gifs.martian);
         }
         clearInterval(clearTimer);
