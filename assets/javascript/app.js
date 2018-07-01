@@ -10,6 +10,20 @@ var answers = [
     ['Neptune', 'Planet Nine', 'Xena', '9th Planet'],
     ['1,479 Minutes', '1,351 Minutes', '1,589 Minutes', '1,154 Minutes']
 ];
+var gifs = {
+	closest: 'https://media.giphy.com/media/26BGLwK0ciNMY7BaU/200.gif', 
+	orbit: 'https://media.giphy.com/media/ipMj7kerASRXO/200.gif',
+	man: 'https://media.giphy.com/media/m3aDH8GEfqNeU/200.gif',
+	sun: 'https://media.giphy.com/media/xT0Gqz4x4eLd5gDtaU/200.gif',
+	venus: 'https://media.giphy.com/media/pryxIWM8T88Qo/200.gif',
+	pluto: 'https://media.giphy.com/media/w0iDk4wqyMwpi/200.gif',
+	moons: 'https://media.giphy.com/media/l3970BECiUweOrOnu/200.gif',
+	travel: 'https://media.giphy.com/media/l3fQnG7CVU9OytX3y/200.gif',
+	nineth: 'https://media.giphy.com/media/l3970BECiUweOrOnu/200.gif',
+	martian: 'https://media.giphy.com/media/l3970BECiUweOrOnu/200.gif',
+	win: 'https://media.giphy.com/media/26DOoDwdNGKAg6UKI/200.gif',
+	lose: 'https://media.giphy.com/media/hPPx8yk3Bmqys/200.gif'
+}
 var correctAnswers = 0;
 var incorrectAnswers = 0;
 var unanswered = 0;
@@ -43,6 +57,7 @@ function startTimer() {
 function nextQuestion(next) {
     sTimer = 15;
     $('#box').empty();
+    $('#answer').empty();
     answersOptions(next);
     $('#timer').html('Time Remaining: ' + sTimer + ' seconds');
     clearTimer = setInterval(startTimer, 1000);
@@ -117,49 +132,55 @@ $('#start').on('click', function() {
     $('button:eq(1)').attr('data-answer', true);
 });
 
+function addGif(num) {
+	var imgGif = $('<img>').attr('src', num);
+	$('#box').html(imgGif)
+}
+
 $(document).on('click', '.options', function() {
     if ($(this).html() == 'Mercury' || $(this).html() == '365 Days' || $(this).html() == 'Neil Armstrong' || $(this).html() == '5,778 Kelvin' || $(this).html() == 'Venus' || $(this).html() == '2006' || $(this).html() == '53' || $(this).html() == 'About 300 Days' || $(this).html() == 'Planet Nine' || $(this).html() == '1,479 Minutes') {
         if ($(this).html() == 'Mercury') {
-            $('#gif').html("Gif of Mercury");
+            addGif(gifs.closest);
         }
         if ($(this).html() == '365 Days') {
-            $('#gif').html("Gif of Calender");
+            addGif(gifs.orbit);
         }
         if ($(this).html() == 'Neil Armstrong') {
-            $('#gif').html("Gif of Neil");
+            addGif(gifs.man);
         }
         if ($(this).html() == '5,778 Kelvin') {
-            $('#gif').html("Gif of the Sun");
+            addGif(gifs.sun);
         }
         if ($(this).html() == 'Venus') {
-            $('#gif').html("Gif of Venus");
+            addGif(gifs.venus);
         }
         if ($(this).html() == '2006') {
-            $('#gif').html("Gif of Pluto");
+            addGif(gifs.pluto);
         }
         if ($(this).html() == '53') {
-            $('#gif').html("Gif of Jupiter");
+            addGif(gifs.moons);
         }
         if ($(this).html() == 'About 300 Days') {
-            $('#gif').html("Gif of space travel");
+            addGif(gifs.travel);
         }
         if ($(this).html() == 'Planet Nine') {
-            $('#gif').html("Gif of Planet Nine");
+            addGif(gifs.nineth);
         }
         if ($(this).html() == '1479 Minutes') {
-            $('#gif').html("Gift of a martian");
+            addGif(gifs.martian);
         }
         clearInterval(clearTimer);
-        $('#question').html("Correct");
+        $('#answer').html("Correct");
         invisTimer = setInterval(interTimer, 1000);
         correctAnswers++;
     } else {
-        trueAns = $('[data-answer=true]').html();
         clearInterval(clearTimer);
-        $('#question').html("Incorrect");
+        $('#answer').html("Incorrect");
         invisTimer = setInterval(interTimer, 1000);
+        trueAns = $('[data-answer=true]').html();
         $('#gif').html("The correct answer is " + trueAns);
         incorrectAnswers++;
+        addGif(gifs.lose);
     }
 });
 
