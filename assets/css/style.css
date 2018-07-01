@@ -15,9 +15,11 @@ div {
 
 h1 {
 	font-family: 'Abril Fatface', cursive;
-	font-size: 100px!important;
+	font-size: 80px!important;
 	margin-top: 40px!important;
-	color: #2ED6FF!important;
+	color: #2EA6FF!important;
+	background-color: #fff;
+	padding-bottom: 14px;
 }
 
 div {
